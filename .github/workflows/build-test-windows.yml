@@ -2,21 +2,10 @@
 name: build-and-test-windows
 on:
   push:
-    branches:
-      - master
-
-    paths-ignore:
-      - '**.md'
-      - '.github/**'
-      - '!.github/workflows/build-*'
-
+    branches: [ main, master ]
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
   workflow_dispatch:
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref_name }}
-  cancel-in-progress: true
 
 jobs:
   windows-unittest:
