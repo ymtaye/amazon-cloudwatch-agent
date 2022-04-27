@@ -230,6 +230,7 @@ func (c *CloudWatch) pushMetricDatum() {
 				c.metricDatumBatch.Size += payload(datums[i])
 				if c.metricDatumBatch.isFull() {
 					// if batch is full
+					log.Printf("I! CloudWatch: Datum Batch is full pushing partitions in batch chan at %s", time.Now().String())
 					c.datumBatchChan <- c.metricDatumBatch.Partition
 					c.metricDatumBatch.clear()
 				}
@@ -311,7 +312,9 @@ func (c *CloudWatch) publish() {
 
 func (c *CloudWatch) metricDatumBatchFull() chan bool {
 	if len(c.datumBatchChan) >= datumBatchChanBufferSize {
+		log.Printf("I! CloudWatch: Datum Batch chan is full at: %s", time.Now().String()) 
 		if len(c.datumBatchFullChan) == 0 {
+		        log.Printf("I! CloudWatch: Setting datumBatchFullChan <- true at: %s", time.Now().String()) 
 			c.datumBatchFullChan <- true
 		}
 		return c.datumBatchFullChan
@@ -320,6 +323,7 @@ func (c *CloudWatch) metricDatumBatchFull() chan bool {
 }
 
 func (c *CloudWatch) pushMetricDatumBatch() {
+        log.Printf("I! CloudWatch: PushMetricDatumBatch at: %s", time.Now().String()) 
 	for {
 		select {
 		case datumBatch := <-c.datumBatchChan:

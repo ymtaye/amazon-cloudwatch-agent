@@ -201,6 +201,7 @@ func (durationAgg *durationAggregator) addMetric(m telegraf.Metric) {
 }
 
 func (durationAgg *durationAggregator) flush() {
+	log.Printf("I! Aggregator: flush at %s", time.Now().String())
 	for _, v := range durationAgg.metricMap {
 		durationAgg.metricChan <- v
 	}
