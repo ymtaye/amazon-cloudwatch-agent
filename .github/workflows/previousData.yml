@@ -198,13 +198,6 @@ jobs:
             else
               terraform destroy -auto-approve && exit 1
             fi
-      - name: Update as release
-        run: |
-          cd integration/test/performancetest
-          export IS_RELEASE=true
-          export SHA=${{matrix.arrays.commitSHA}}
-          export RELEASE_NAME=${{matrix.arrays.releaseName}}
-          go test -run TestUpdateCommit -p 1 -v --tags=integration
       #This is here just in case workflow cancel
       - name: Terraform destroy
         if: ${{ cancelled() && steps.ec2-linux-integration-test.outputs.cache-hit != 'true' }}
