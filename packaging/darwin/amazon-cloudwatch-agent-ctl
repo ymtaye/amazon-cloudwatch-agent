@@ -263,7 +263,7 @@ main() {
 
      case "${mode}" in
      ec2) ;;
-     onPremise) ;;
+     onPremise) mode=onPrem ;;;;
      onPrem) ;;
      auto) ;;
      *)
