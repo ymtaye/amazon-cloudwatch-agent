@@ -23,7 +23,7 @@ const commonConfigTOML = "/common-config.toml"
 const targetString = "x509: certificate signed by unknown authority"
 
 //Let the agent run for 1 minutes. This will give agent enough time to call server
-const agentRuntime = 1 * time.Minute
+const agentRuntime = 2 * time.Minute
 
 type input struct {
 	findTarget bool
