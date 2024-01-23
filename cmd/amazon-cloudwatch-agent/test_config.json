@@ -1,0 +1,18 @@
+"logs": {
+"logs_collected": {
+"files": {
+"collect_list": [
+{
+"file_path": "/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log",
+"log_group_name": "amazon-cloudwatch-agent.log"
+},
+{
+"file_path": "/opt/aws/amazon-cloudwatch-agent/logs/testing.log",
+"log_group_name": "testing.log",
+"log_stream_name": "testing.log",
+"timestamp_format": "%m %d %H:%M:%S"
+}
+]
+}
+}
+}

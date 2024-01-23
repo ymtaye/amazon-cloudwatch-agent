@@ -11,14 +11,12 @@ import (
 	"sync"
 	"time"
 
+	"github.com/aws/amazon-cloudwatch-agent/logs"
+	"github.com/aws/amazon-cloudwatch-agent/profiler"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/aws/aws-sdk-go/service/cloudwatchlogs"
 	"github.com/influxdata/telegraf"
-
-	"github.com/aws/amazon-cloudwatch-agent/logs"
-	"github.com/aws/amazon-cloudwatch-agent/profiler"
-        
 	"go.uber.org/zap"
 )
 
@@ -133,7 +131,7 @@ func hasValidTime(e logs.LogEvent) bool {
 func (p *pusher) start() {
 	defer p.wg.Done()
 
-	sampledLogger := cwaLogger.SampledLogger()
+	sampledLogger := cwaLogger.SampledLogger(Log.actualLogger)
 
 	ec := make(chan logs.LogEvent)
 
@@ -467,4 +465,3 @@ func (inputLogEvents ByTimestamp) Swap(i, j int) {
 func (inputLogEvents ByTimestamp) Less(i, j int) bool {
 	return *inputLogEvents[i].Timestamp < *inputLogEvents[j].Timestamp
 }
-
