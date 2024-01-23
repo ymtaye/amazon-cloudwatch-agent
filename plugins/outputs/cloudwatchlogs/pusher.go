@@ -131,7 +131,7 @@ func hasValidTime(e logs.LogEvent) bool {
 func (p *pusher) start() {
 	defer p.wg.Done()
 
-	sampledLogger := cwaLogger.SampledLogger(Log.actualLogger)
+	sampledLogger := cwaLogger.SampledLogger(p.Log.actualLogger)
 
 	ec := make(chan logs.LogEvent)
 
